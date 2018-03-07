@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.MotionEventCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -16,10 +18,12 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 
 import io.adaptivecards.renderer.RenderedAdaptiveCard;
 import io.adaptivecards.renderer.BaseCardElementRenderer;
+import io.adaptivecards.renderer.Util;
 import io.adaptivecards.renderer.actionhandler.ICardActionHandler;
 import io.adaptivecards.objectmodel.*;
 import io.adaptivecards.renderer.AdaptiveCardRenderer;
@@ -102,18 +106,26 @@ public class MainActivityAdaptiveCardsSample extends FragmentActivity
             super(type);
         }
 
-        public String getSecretString()
+        public String getUrl()
         {
-            return secretString;
+            return m_url;
         }
 
-        public void setSecretString(String secret)
+        public void setUrl(String url)
         {
-            secretString = secret;
+            m_url = url;
         }
 
-        private String secretString;
+        private String m_url;
+        private int m_size;
 
+        public int getSize() {
+            return m_size;
+        }
+
+        public void setSize(int size) {
+            this.m_size = size;
+        }
     }
 
     protected void setupTabs()
@@ -126,41 +138,70 @@ public class MainActivityAdaptiveCardsSample extends FragmentActivity
         tabHost.setCurrentTab(0);
     }
 
-    public class CustomBlahParser extends BaseCardElementParser
+    public class VideoElementParser extends BaseCardElementParser
     {
         @Override
         public BaseCardElement Deserialize(ElementParserRegistration elementParserRegistration, ActionParserRegistration actionParserRegistration, JsonValue value)
         {
             CustomCardElement element = new CustomCardElement(CardElementType.Custom);
-            element.SetElementTypeString("blah");
-            element.SetId("BlahDeserialize");
+            element.SetElementTypeString("video");
             String val = value.getString();
             try {
                 JSONObject obj = new JSONObject(val);
-                element.setSecretString(obj.getString("secret"));
+                element.setUrl(obj.getString("url"));
+                element.setSize(obj.getInt("size"));
             } catch (JSONException e) {
                 e.printStackTrace();
-                element.setSecretString("Failed");
+                element.setUrl("Failed");
+                element.setSize(30);
             }
             return element;
         }
     }
 
-    public class CustomBlahRenderer extends BaseCardElementRenderer
+    public class VideoRenderer extends BaseCardElementRenderer
     {
         @Override
         public View render(RenderedAdaptiveCard renderedAdaptiveCard, Context context, FragmentManager fragmentManager, ViewGroup viewGroup, BaseCardElement baseCardElement, ICardActionHandler cardActionHandler, HostConfig hostConfig, ContainerStyle containerStyle) {
-            TextView textView = new TextView(context);
-
+            //TextView textView = new TextView(context);
             CustomCardElement element = (CustomCardElement) baseCardElement.findImplObj();
 
-            textView.setText(element.getSecretString());
+            VideoView videoView = new VideoView(context);
+            videoView.setLayoutParams(new LinearLayout.LayoutParams(Util.dpToPixels(context, element.getSize()),Util.dpToPixels(context, element.getSize())*2/3));
 
-            textView.setAllCaps(true);
+            setSpacingAndSeparator(context, viewGroup, element.GetSpacing(), false, hostConfig, true);
 
-            viewGroup.addView(textView);
+            videoView.setVideoURI(Uri.parse(element.getUrl()));
 
-            return textView;
+            videoView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event)
+                {
+                    int action = MotionEventCompat.getActionMasked(event);
+                    VideoView clickedView = (VideoView) v;
+                    if (action == MotionEvent.ACTION_UP)
+                    {
+                        if (clickedView.isPlaying())
+                        {
+                            clickedView.pause();
+                        }
+                        else
+                        {
+                            clickedView.start();
+                        }
+                    }
+                    return true;
+                }
+            });
+
+            //textView.setText(element.getSecretString());
+
+            //textView.setAllCaps(true);
+
+            //viewGroup.addView(textView);
+            viewGroup.addView(videoView);
+            videoView.start();
+            return videoView;
         }
     }
 
@@ -186,9 +227,9 @@ public class MainActivityAdaptiveCardsSample extends FragmentActivity
             }
 
             ElementParserRegistration elementParserRegistration = new ElementParserRegistration();
-            elementParserRegistration.AddParser("blah", new CustomBlahParser());
+            elementParserRegistration.AddParser("video", new VideoElementParser());
 
-            CardRendererRegistration.getInstance().registerRenderer("blah", new CustomBlahRenderer());
+            CardRendererRegistration.getInstance().registerRenderer("video", new VideoRenderer());
             
             AdaptiveCard adaptiveCard = AdaptiveCard.DeserializeFromString(jsonText, AdaptiveCardRenderer.VERSION, elementParserRegistration);
             LinearLayout layout = (LinearLayout) findViewById(R.id.visualAdaptiveCardLayout);
