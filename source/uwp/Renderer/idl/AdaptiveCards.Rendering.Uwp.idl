@@ -1,5 +1,6 @@
 #include <sdkddkver.h>
 
+import "windowscontracts.idl";
 import "inspectable.idl";
 import "Windows.Foundation.idl";
 import "Windows.UI.Xaml.idl";
@@ -413,6 +414,11 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     {
         [default] interface IAdaptiveTextBlock;
         interface IAdaptiveCardElement;
+    };
+
+    runtimeclass TestModernIdl
+    {
+        TestModernIdl();
     };
 
     [
