@@ -204,10 +204,10 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     {
         ElementType ElementType{ get; };
         String ElementTypeString{ get; };
-        Spacing Spacing{ get; set; };
-        Boolean Separator{ get; set; };
-        String Id{ get; set; };
-        Windows.Data.Json.JsonObject AdditionalProperties{ get; set; };
+        Spacing Spacing;
+        Boolean Separator;
+        String Id;
+        Windows.Data.Json.JsonObject AdditionalProperties;
 
         Windows.Data.Json.JsonObject ToJson();
     };
@@ -215,22 +215,22 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     runtimeclass AdaptiveSeparator
     {
         AdaptiveSeparator();
-        ForegroundColor Color{ get; set; };
-        SeparatorThickness Thickness{ get; set; };
+        ForegroundColor Color;
+        SeparatorThickness Thickness;
     };
 
     runtimeclass AdaptiveTextBlock : IAdaptiveCardElement
     {
         AdaptiveTextBlock();
-        TextSize Size{ get; set; };
-        TextWeight Weight{ get; set; };
-        ForegroundColor Color{ get; set; };
-        String Text{ get; set; };
-        Boolean IsSubtle{ get; set; };
-        Boolean Wrap{ get; set; };
-        HAlignment HorizontalAlignment{ get; set; };
-        UInt32 MaxLines{ get; set; };
-        String Language{ get; set; };
+        TextSize Size;
+        TextWeight Weight;
+        ForegroundColor Color;
+        String Text;
+        Boolean IsSubtle;
+        Boolean Wrap;
+        HAlignment HorizontalAlignment;
+        UInt32 MaxLines;
+        String Language;
     };
 
     runtimeclass AdaptiveCard
@@ -241,11 +241,11 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
         Windows.Foundation.Collections.IVector<IAdaptiveActionElement*> Actions{ get; };
 
         ElementType ElementType{ get; };
-        String Version{ get; set; };
-        String FallbackText{ get; set; };
-        Windows.Foundation.Uri BackgroundImage{ get; set; };
-        String Speak{ get; set; };
-        ContainerStyle Style{ get; set; };
+        String Version;
+        String FallbackText;
+        Windows.Foundation.Uri BackgroundImage;
+        String Speak;
+        ContainerStyle Style;
 
         Windows.Data.Json.JsonObject ToJson();
         
@@ -278,12 +278,12 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
 
     interface IAdaptiveImage : IInspectable 
     {
-        Windows.Foundation.Uri Url{ get; set; };
-        ImageStyle Style{ get; set; };
-        ImageSize Size{ get; set; };
-        HAlignment HorizontalAlignment{ get; set; };
-        String AltText{ get; set; };
-        IAdaptiveActionElement SelectAction{ get; set; };
+        Windows.Foundation.Uri Url;
+        ImageStyle Style;
+        ImageSize Size;
+        HAlignment HorizontalAlignment;
+        String AltText;
+        IAdaptiveActionElement SelectAction;
     };
 
     runtimeclass AdaptiveImage : IAdaptiveImage, IAdaptiveCardElement
@@ -295,20 +295,20 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     {
         AdaptiveImageSet();
         Windows.Foundation.Collections.IVector<IAdaptiveImage*> Images{ get; };
-        ImageSize ImageSize{ get; set; };
+        ImageSize ImageSize;
     };
 
     interface IAdaptiveInputElement : IInspectable
     {
-        Boolean IsRequired{ get; set; };
+        Boolean IsRequired;
     };
 
     interface IAdaptiveChoiceInput 
     {
         ElementType ElementType{ get; };
 
-        String Title{ get; set; };
-        String Value{ get; set; };
+        String Title;
+        String Value;
     };
 
     runtimeclass AdaptiveChoiceInput : IAdaptiveChoiceInput
@@ -320,9 +320,9 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     {
         AdaptiveChoiceSetInput();
     
-        String Value{ get; set; };
-        Boolean IsMultiSelect{ get; set; };
-        ChoiceSetStyle ChoiceSetStyle{ get; set; };
+        String Value;
+        Boolean IsMultiSelect;
+        ChoiceSetStyle ChoiceSetStyle;
 
         Windows.Foundation.Collections.IVector<IAdaptiveChoiceInput*> Choices{ get; };
     };
@@ -331,67 +331,67 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     {
         AdaptiveDateInput();
 
-        String Max{ get; set; };
-        String Min{ get; set; };
-        String Placeholder{ get; set; };
-        String Value{ get; set; };
+        String Max;
+        String Min;
+        String Placeholder;
+        String Value;
     };
 
     runtimeclass AdaptiveNumberInput : IAdaptiveInputElement, IAdaptiveCardElement
     {
         AdaptiveNumberInput();
 
-        INT32 Max{ get; set; };
-        INT32 Min{ get; set; };
-        String Placeholder{ get; set; };
-        INT32 Value{ get; set; };
+        INT32 Max;
+        INT32 Min;
+        String Placeholder;
+        INT32 Value;
     };
 
     runtimeclass AdaptiveTextInput : IAdaptiveInputElement, IAdaptiveCardElement
     {
         AdaptiveTextInput();
 
-        Boolean IsMultiline{ get; set; };
-        UINT32 MaxLength{ get; set; };
-        String Placeholder{ get; set; };
-        String Value{ get; set; };
-        TextInputStyle TextInputStyle{ get; set; };
+        Boolean IsMultiline;
+        UINT32 MaxLength;
+        String Placeholder;
+        String Value;
+        TextInputStyle TextInputStyle;
     };
 
     runtimeclass AdaptiveTimeInput : IAdaptiveInputElement, IAdaptiveCardElement
     {
         AdaptiveTimeInput();
 
-        String Max{ get; set; };
-        String Min{ get; set; };
-        String Placeholder{ get; set; };
-        String Value{ get; set; };
+        String Max;
+        String Min;
+        String Placeholder;
+        String Value;
     };
 
     runtimeclass AdaptiveToggleInput : IAdaptiveInputElement, IAdaptiveCardElement
     {
         AdaptiveToggleInput();
 
-        String Title{ get; set; };
-        String Value{ get; set; };
-        String ValueOff{ get; set; };
-        String ValueOn{ get; set; };
+        String Title;
+        String Value;
+        String ValueOff;
+        String ValueOn;
     };
 
     runtimeclass AdaptiveContainer : IAdaptiveCardElement
     {
         AdaptiveContainer();
-        ContainerStyle Style{ get; set; };
+        ContainerStyle Style;
         Windows.Foundation.Collections.IVector<IAdaptiveCardElement*> Items{ get; };
-        IAdaptiveActionElement SelectAction{ get; set; };
+        IAdaptiveActionElement SelectAction;
     };
 
     interface IAdaptiveColumn : IInspectable
     {
-        String Width{ get; set; };
-        ContainerStyle Style{ get; set; };
+        String Width;
+        ContainerStyle Style;
         Windows.Foundation.Collections.IVector<IAdaptiveCardElement*> Items{ get; };
-        IAdaptiveActionElement SelectAction{ get; set; };
+        IAdaptiveActionElement SelectAction;
     };
 
     runtimeclass AdaptiveColumn : IAdaptiveColumn, IAdaptiveCardElement
@@ -403,14 +403,14 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     {
         AdaptiveColumnSet();
         Windows.Foundation.Collections.IVector<IAdaptiveColumn*> Columns{ get; };
-        IAdaptiveActionElement SelectAction{ get; set; };
+        IAdaptiveActionElement SelectAction;
     };
 
     interface IAdaptiveFact : IInspectable
     {
         ElementType ElementType{ get; };
-        String Title{ get; set; };
-        String Value{ get; set; };
+        String Title;
+        String Value;
     };
 
     runtimeclass AdaptiveFact : IAdaptiveFact
@@ -428,9 +428,9 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     {
         AdaptiveCardRenderer();
         AdaptiveCardResourceResolvers ResourceResolvers{ get; };
-        AdaptiveHostConfig HostConfig{ get; set; };
+        AdaptiveHostConfig HostConfig;
 
-        Windows.UI.Xaml.ResourceDictionary OverrideStyles{ get; set; };
+        Windows.UI.Xaml.ResourceDictionary OverrideStyles;
 
         void SetFixedDimensions(UInt32 desiredWidth, UInt32 desiredHeight);
         void ResetFixedDimensions();
@@ -451,153 +451,153 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     runtimeclass AdaptiveContainerStyleDefinition
     {
         AdaptiveContainerStyleDefinition();
-        Windows.UI.Color BackgroundColor{ get; set; };
-        AdaptiveColorsConfig ForegroundColors{ get; set; };
+        Windows.UI.Color BackgroundColor;
+        AdaptiveColorsConfig ForegroundColors;
     };
 
     runtimeclass AdaptiveContainerStylesDefinition
     {
         AdaptiveContainerStylesDefinition();
-        AdaptiveContainerStyleDefinition Default{ get; set; };
-        AdaptiveContainerStyleDefinition Emphasis{ get; set; };
+        AdaptiveContainerStyleDefinition Default;
+        AdaptiveContainerStyleDefinition Emphasis;
     };
 
     runtimeclass AdaptiveFontSizesConfig 
     {
         AdaptiveFontSizesConfig();
-        UInt32 Small{ get; set; };
-        UInt32 Default{ get; set; };
-        UInt32 Medium{ get; set; };
-        UInt32 Large{ get; set; };
-        UInt32 ExtraLarge{ get; set; };
+        UInt32 Small;
+        UInt32 Default;
+        UInt32 Medium;
+        UInt32 Large;
+        UInt32 ExtraLarge;
     };
 
     runtimeclass AdaptiveFontWeightsConfig
     {
         AdaptiveFontWeightsConfig();
-        UInt16 Lighter{ get; set; };
-        UInt16 Default{ get; set; };
-        UInt16 Bolder{ get; set; };
+        UInt16 Lighter;
+        UInt16 Default;
+        UInt16 Bolder;
     };
 
     runtimeclass AdaptiveColorConfig
     {
         AdaptiveColorConfig();
-        Windows.UI.Color Default{ get; set; };
-        Windows.UI.Color Subtle{ get; set; };
+        Windows.UI.Color Default;
+        Windows.UI.Color Subtle;
     };
 
     runtimeclass AdaptiveColorsConfig
     {
         AdaptiveColorsConfig();
-        AdaptiveColorConfig Default{ get; set; };
-        AdaptiveColorConfig Accent{ get; set; };
-        AdaptiveColorConfig Dark{ get; set; };
-        AdaptiveColorConfig Light{ get; set; };
-        AdaptiveColorConfig Good{ get; set; };
-        AdaptiveColorConfig Warning{ get; set; };
-        AdaptiveColorConfig Attention{ get; set; };
+        AdaptiveColorConfig Default;
+        AdaptiveColorConfig Accent;
+        AdaptiveColorConfig Dark;
+        AdaptiveColorConfig Light;
+        AdaptiveColorConfig Good;
+        AdaptiveColorConfig Warning;
+        AdaptiveColorConfig Attention;
     };
 
     runtimeclass AdaptiveTextConfig
     {
         AdaptiveTextConfig();
-        TextWeight Weight{ get; set; };
-        TextSize Size{ get; set; };
-        ForegroundColor Color{ get; set; };
-        Boolean IsSubtle{ get; set; };
-        Boolean Wrap{ get; set; };
-        UInt32 MaxWidth{ get; set; };
+        TextWeight Weight;
+        TextSize Size;
+        ForegroundColor Color;
+        Boolean IsSubtle;
+        Boolean Wrap;
+        UInt32 MaxWidth;
     };
 
     runtimeclass AdaptiveSpacingConfig
     {
         AdaptiveSpacingConfig();
-        UInt32 Small{ get; set; };
-        UInt32 Default{ get; set; };
-        UInt32 Medium{ get; set; };
-        UInt32 Large{ get; set; };
-        UInt32 ExtraLarge{ get; set; };
-        UInt32 Padding{ get; set; };
+        UInt32 Small;
+        UInt32 Default;
+        UInt32 Medium;
+        UInt32 Large;
+        UInt32 ExtraLarge;
+        UInt32 Padding;
     };
 
     runtimeclass AdaptiveSeparatorConfig
     {
         AdaptiveSeparatorConfig();
-        UInt32 LineThickness{ get; set; };
-        Windows.UI.Color LineColor{ get; set; };
+        UInt32 LineThickness;
+        Windows.UI.Color LineColor;
     };
 
     runtimeclass AdaptiveImageSizesConfig
     {
         AdaptiveImageSizesConfig();
-        UInt32 Small{ get; set; };
-        UInt32 Medium{ get; set; };
-        UInt32 Large{ get; set; };
+        UInt32 Small;
+        UInt32 Medium;
+        UInt32 Large;
     };
 
     runtimeclass AdaptiveImageSetConfig
     {
         AdaptiveImageSetConfig();
-        ImageSize ImageSize{ get; set; };
-        UInt32 MaxImageHeight{ get; set; };
+        ImageSize ImageSize;
+        UInt32 MaxImageHeight;
     };
 
     runtimeclass AdaptiveImageConfig
     {
         AdaptiveImageConfig();
-        ImageSize ImageSize{ get; set; };
+        ImageSize ImageSize;
     };
 
     runtimeclass AdaptiveCardConfig
     {
         AdaptiveCardConfig();
-        Boolean AllowCustomStyle{ get; set; };
+        Boolean AllowCustomStyle;
     };
 
     runtimeclass AdaptiveFactSetConfig
     {
         AdaptiveFactSetConfig();
-        AdaptiveTextConfig Title{ get; set; };
-        AdaptiveTextConfig Value{ get; set; };
-        UInt32 Spacing{ get; set; };
+        AdaptiveTextConfig Title;
+        AdaptiveTextConfig Value;
+        UInt32 Spacing;
     };
 
     runtimeclass AdaptiveShowCardActionConfig
     {
         AdaptiveShowCardActionConfig();
-        ActionMode ActionMode{ get; set; };
-        ContainerStyle Style{ get; set; };
-        UInt32 InlineTopMargin{ get; set; };
+        ActionMode ActionMode;
+        ContainerStyle Style;
+        UInt32 InlineTopMargin;
     };
 
     runtimeclass AdaptiveActionsConfig
     {
         AdaptiveActionsConfig();
-        AdaptiveShowCardActionConfig ShowCard{ get; set; };
-        ActionsOrientation ActionsOrientation{ get; set; };
-        ActionAlignment ActionAlignment{ get; set; };
-        UInt32 ButtonSpacing{ get; set; };
-        UInt32 MaxActions{ get; set; };
-        Spacing Spacing{ get; set; };
+        AdaptiveShowCardActionConfig ShowCard;
+        ActionsOrientation ActionsOrientation;
+        ActionAlignment ActionAlignment;
+        UInt32 ButtonSpacing;
+        UInt32 MaxActions;
+        Spacing Spacing;
     };
 
     runtimeclass AdaptiveHostConfig
     {
         AdaptiveHostConfig();
-        String FontFamily{ get; set; };
-        AdaptiveFontSizesConfig FontSizes{ get; set; };
-        AdaptiveFontWeightsConfig FontWeights{ get; set; };
-        Boolean SupportsInteractivity{ get; set; };
-        AdaptiveContainerStylesDefinition ContainerStyles{ get; set; };
-        AdaptiveImageSizesConfig ImageSizes{ get; set; };
-        AdaptiveSeparatorConfig Separator{ get; set; };
-        AdaptiveSpacingConfig Spacing{ get; set; };
-        AdaptiveCardConfig AdaptiveCard{ get; set; };
-        AdaptiveImageSetConfig ImageSet{ get; set; };
-        AdaptiveImageConfig Image{ get; set; };
-        AdaptiveFactSetConfig FactSet{ get; set; };
-        AdaptiveActionsConfig Actions{ get; set; };
+        String FontFamily;
+        AdaptiveFontSizesConfig FontSizes;
+        AdaptiveFontWeightsConfig FontWeights;
+        Boolean SupportsInteractivity;
+        AdaptiveContainerStylesDefinition ContainerStyles;
+        AdaptiveImageSizesConfig ImageSizes;
+        AdaptiveSeparatorConfig Separator;
+        AdaptiveSpacingConfig Spacing;
+        AdaptiveCardConfig AdaptiveCard;
+        AdaptiveImageSetConfig ImageSet;
+        AdaptiveImageConfig Image;
+        AdaptiveFactSetConfig FactSet;
+        AdaptiveActionsConfig Actions;
 
         static AdaptiveHostConfigParseResult FromJsonString(String hostConfigJson);
         static AdaptiveHostConfigParseResult FromJson(Windows.Data.Json.JsonObject hostConfigJson);
@@ -615,9 +615,9 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
         ActionType ActionType{ get; };
         String ActionTypeString{ get; };
 
-        String Title{ get; set; };
-        String Id{ get; set; };
-        Windows.Data.Json.JsonObject AdditionalProperties{ get; set; };
+        String Title;
+        String Id;
+        Windows.Data.Json.JsonObject AdditionalProperties;
 
         Windows.Data.Json.JsonObject ToJson();
     };
@@ -625,20 +625,20 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     runtimeclass AdaptiveOpenUrlAction : IAdaptiveActionElement
     {
         AdaptiveOpenUrlAction();
-        Windows.Foundation.Uri Url{ get; set; };
+        Windows.Foundation.Uri Url;
     };
 
     runtimeclass AdaptiveShowCardAction : IAdaptiveActionElement
     {
         AdaptiveShowCardAction();
-        AdaptiveCard Card{ get; set; };
+        AdaptiveCard Card;
     };
 
 
     runtimeclass AdaptiveSubmitAction : IAdaptiveActionElement
     {
         AdaptiveSubmitAction();
-        Windows.Data.Json.JsonValue DataJson{ get; set; };
+        Windows.Data.Json.JsonValue DataJson;
     };
 
     runtimeclass AdaptiveCardResourceResolvers
@@ -840,8 +840,8 @@ namespace AdaptiveCards { namespace Rendering { namespace Uwp
     runtimeclass AdaptiveRenderArgs
     { 
         AdaptiveRenderArgs();
-        ContainerStyle ContainerStyle{ get; set; };
-        IInspectable ParentElement{ get; set; };
+        ContainerStyle ContainerStyle;
+        IInspectable ParentElement;
     };
 
     interface IAdaptiveError : IInspectable
